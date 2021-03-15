@@ -1,6 +1,16 @@
-// SPDX-License-Identifier: GPL-2.0
 /*
- * Copyright (c) 2020 MediaTek Inc.
+ *
+ * Author: MingHsien Hsieh <minghsien.hsieh@mediatek.com>
+ *
+ * This software is licensed under the terms of the GNU General Public
+ * License version 2, as published by the Free Software Foundation, and
+ * may be copied, distributed, and modified under those terms.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
  */
 
 #include <linux/of.h>
@@ -31,9 +41,14 @@
 #define APS_FUN(f)               pr_debug(APS_TAG "%s\n", __func__)
 
 #define APS_ERR(fmt, args...)	pr_info(APS_TAG fmt, ##args)
+#if 1
+#define APS_LOG(fmt, args...)	pr_debug(APS_TAG fmt, ##args)
 
+#define APS_DBG(fmt, args...)	pr_debug(APS_TAG fmt, ##args)
+#else
 #define APS_DBG(fmt, args...)
 #define APS_LOG(fmt, args...)
+#endif
 
 /*----------------------------------------------------------------------------*/
 
