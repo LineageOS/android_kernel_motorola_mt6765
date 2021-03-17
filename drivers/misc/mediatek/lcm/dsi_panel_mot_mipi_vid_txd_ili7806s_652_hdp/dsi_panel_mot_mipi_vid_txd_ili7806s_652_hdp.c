@@ -322,8 +322,6 @@ static void lcm_resume(void)
 
 static unsigned int lcm_compare_id(void)
 {
-	return 1;
-	/*
 	unsigned char buffer[4];
 	unsigned int array[16];
 
@@ -345,7 +343,6 @@ static unsigned int lcm_compare_id(void)
 		return 1;
 	else
 		return 0;
-*/
 }
 
 
