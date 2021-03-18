@@ -424,8 +424,10 @@ struct thermal_cooling_device *cdev, unsigned long state)
 		/* To trigger data abort to reset the system
 		 * for thermal protection.
 		 */
+#ifdef MTK_BASE
 		//BUG();
 		kernel_power_off();
+#endif
 	}
 	return 0;
 }
