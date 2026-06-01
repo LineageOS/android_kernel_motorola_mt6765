@@ -11,46 +11,21 @@
  */
 
 #include "mediatek/mt6765-moto-common-overlay.dtsi"
+#include "mediatek/mt6765-moto-common-irtx.dtsi"
 #include "mediatek/mt6765-moto-tonga-fps.dtsi"
-#include "cust_mt6765_touch_tonga_720x1600.dtsi"
-#include <dt-bindings/mmc/mt6765-msdc.h>
-#include "mt6765-tonga-camera-sensor-overlay.dtsi"
+#include "mediatek/mt6765-tonga-camera-sensor-overlay.dtsi"
+#include "mediatek/cust_mt6765_touch_tonga_720x1600.dtsi"
+
 &mtk_charger_type {
 	bc12_active = <0>;
 };
+
 &mt6370_chg {
 	bc12_sel = <0>;
 };
+
 &usb {
 	charger = <&mtk_charger_type>;
-};
-
-&tboard_thermistor1 {
-	compatible = "mediatek,mtboard-thermistor1";
-	io-channels = <&auxadc 0>;
-	io-channel-names = "thermistor-ch0";
-	interconnects = <&auxadc 0>;
-};
-
-&tboard_thermistor2 {
-	compatible = "mediatek,mtboard-thermistor2";
-	io-channels = <&auxadc 1>;
-	io-channel-names = "thermistor-ch1";
-	interconnects = <&auxadc 1>;
-};
-
-&tboard_thermistor3 {
-	compatible = "mediatek,mtboard-thermistor3";
-	io-channels = <&auxadc 2>;
-	io-channel-names = "thermistor-ch2";
-	interconnects = <&auxadc 2>;
-};
-
-&tboard_thermistor4 {
-	compatible = "mediatek,mtboard-thermistor4";
-	io-channels = <&auxadc 3>;
-	io-channel-names = "thermistor-ch3";
-	interconnects = <&auxadc 3>;
 };
 
 &i2c5 {
@@ -87,9 +62,11 @@
 		ti,bq2560x,vac-ovp-threshold = <6500>;
 	};
 };
+
 &pdc {
 	pd_vbus_upper_bound = <5000000>;
 };
+
 &lk_charger {
 	ac_charger_input_current = <2000000>;
 	non_std_ac_charger_current = <500000>;
@@ -99,12 +76,15 @@
 &pe {
 	status = "disable";
 };
+
 &pe2 {
 	status = "disable";
 };
+
 &pe4 {
 	status = "disable";
 };
+
 &charger {
 	charger = <&mtk_charger_type>;
 	/* common */
@@ -136,6 +116,7 @@
 	mmi,upper-limit-capacity = <65>;
 	mmi,lower-limit-capacity = <60>;
 };
+
 &mtk_gauge {
 	charger = <&mtk_charger_type>;
 	extern_charger = <&bq2560x_charger>;
@@ -318,8 +299,4 @@
 
 &regulator_vibrator {
 	min-volt = <3000000>;
-};
-
-&msdc1 {
-	cd_level = /bits/ 8 <MSDC_CD_HIGH>;
 };

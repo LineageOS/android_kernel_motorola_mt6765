@@ -10,26 +10,21 @@
 	moto_chg_tcmd: moto_chg_tcmd {
 	};
 
-	/delete-node/ tboard_thermistor1;
-	/delete-node/ tboard_thermistor2;
-	/delete-node/ tboard_thermistor3;
-	tboard_thermistor1: thermal-sensor1 {
+	lk_charger: lk_charger {
+		/delete-property/ enable_pe_plus;
 	};
 
-	tboard_thermistor2: thermal-sensor2 {
+	charger: charger {
+		/delete-property/ enable_dynamic_mivr;
 	};
 
-	tboard_thermistor3: thermal-sensor3 {
+	key_google: key_google {
 	};
 
 	tboard_thermistor4: thermal-sensor4 {
+		compatible = "mediatek,mtboard-thermistor4";
+		io-channels = <&auxadc 3>;
+		io-channel-names = "thermistor-ch4";
+		interconnects = <&auxadc 3>;
 	};
-
-        lk_charger: lk_charger {
-             /delete-property/ enable_pe_plus;
-        };
-        charger: charger {
-             /delete-property/ enable_dynamic_mivr;
-        };
-
 };

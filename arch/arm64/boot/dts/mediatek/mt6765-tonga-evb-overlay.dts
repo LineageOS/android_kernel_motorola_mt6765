@@ -13,6 +13,11 @@
 /dts-v1/;
 /plugin/;
 
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/pinctrl/mt6765-pinfunc.h>
+#include <dt-bindings/mmc/mt6765-msdc.h>
+
 #include "mediatek/mt6765-tonga-common-overlay.dtsi"
 
 /* Board match root node */
