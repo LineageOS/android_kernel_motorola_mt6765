@@ -441,7 +441,7 @@ err:
 	return err;
 }
 
-bool mmi_check_pfchargebootmode() {
+bool mmi_check_pfchargebootmode(void) {
         char *mmi_bootmode;
         if (mmi_get_bootarg("androidboot.mode=", &mmi_bootmode) == 0) {
                 pr_info("[%s] check mmi_bootmode = %s.\n", __func__, mmi_bootmode);
