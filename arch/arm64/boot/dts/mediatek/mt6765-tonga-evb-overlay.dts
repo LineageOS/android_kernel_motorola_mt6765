@@ -31,5 +31,5 @@
 	};
 };
 
-#include <tonga_evb/cust.dtsi>
+#include "mediatek/cust/tonga_evb.dtsi"
 /*End of this file, DO NOT ADD ANYTHING HERE*/

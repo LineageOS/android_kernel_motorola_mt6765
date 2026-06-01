@@ -31,5 +31,5 @@
 	};
 };
 
-#include <maui_evb/cust.dtsi>
+#include "mediatek/cust/maui_evb.dtsi"
 /*End of this file, DO NOT ADD ANYTHING HERE*/

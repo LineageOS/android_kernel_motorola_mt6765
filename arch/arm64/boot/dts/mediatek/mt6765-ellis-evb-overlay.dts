@@ -43,5 +43,5 @@
 	sgm7220,en_gpio = <&pio 159 0x0>;
 };
 
-#include <ellis_evb/cust.dtsi>
+#include "mediatek/cust/ellis_evb.dtsi"
 /*End of this file, DO NOT ADD ANYTHING HERE*/

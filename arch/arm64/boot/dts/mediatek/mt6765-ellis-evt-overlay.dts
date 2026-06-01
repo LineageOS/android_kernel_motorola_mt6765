@@ -45,5 +45,5 @@
 	/delete-property/ sgm7220,en_gpio;
 };
 
-#include <ellis_evt/cust.dtsi>
+#include "mediatek/cust/ellis_evt.dtsi"
 /*End of this file, DO NOT ADD ANYTHING HERE*/
