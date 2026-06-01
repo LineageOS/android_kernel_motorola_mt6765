@@ -727,7 +727,7 @@ static void normal_video_setting(kal_uint16 currefps)
 	write_cmos_sensor_8(0x0100, 0x01);
 }
 
-static void hs_video_setting()
+static void hs_video_setting(void)
 {
 	write_cmos_sensor_8(0X0100, 0X00);
 	write_cmos_sensor_8(0X0136, 0X18);

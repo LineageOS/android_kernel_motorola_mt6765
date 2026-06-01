@@ -872,7 +872,7 @@ p_err:
 	LOG_INF(" end writing file");
 }
 
-static void ov02b1b_eeprom_format_calibration_data()
+static void ov02b1b_eeprom_format_calibration_data(void)
 {
 	mnf_status = 0;
 	af_status = 0;

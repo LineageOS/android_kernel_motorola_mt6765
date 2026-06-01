@@ -720,7 +720,7 @@ DISP_DATAORDER =
 	write_cmos_sensor_8(0x30BA, 0x36);
 	write_cmos_sensor_8(0x0100, 0x01);
 }
-static void hs_video_setting()
+static void hs_video_setting(void)
 {
 /*
 [SENSOR_RES_MOD]

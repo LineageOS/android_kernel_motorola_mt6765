@@ -700,7 +700,7 @@ static calibration_status_t lsc_status = CRC_FAILURE;
 static calibration_status_t pdaf_status = CRC_FAILURE;
 static calibration_status_t dual_status = CRC_FAILURE;
 
-static void gc02m1b_eeprom_format_calibration_data()
+static void gc02m1b_eeprom_format_calibration_data(void)
 {
 	mnf_status = 0;
 	af_status = 0;
