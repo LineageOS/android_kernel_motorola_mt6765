@@ -33,7 +33,7 @@ firmware_class.path=/vendor/firmware";
 		kaslr-seed = <0 0>;
 	};
 
-	regulator_vibrator {
+	regulator_vibrator: regulator_vibrator {
 		compatible = "regulator-vibrator";
 		min-volt = <2300000>;
 		max-volt = <3200000>;
@@ -2734,11 +2734,6 @@ firmware_class.path=/vendor/firmware";
 		compatible = "mediatek,irq_nfc-eint";
 	};
 
-	mtee_svp: mtee_svp {
-		compatible = "medaitek,svp";
-	};
-	/* svp end */
-
 	disp_mutex0: disp_mutex0@14001000 {
 		compatible = "mediatek,disp_mutex0";
 		reg = <0 0x14001000 0 0x1000>;
@@ -3027,6 +3022,11 @@ firmware_class.path=/vendor/firmware";
 			"TOP_ULPOSC1_D2",
 			"TOP_ULPOSC1_D8";
 	};
+/* +EKTONG-20,longyili.wt,20210428,add SWTP bringup */
+	swtp:swtp {
+		compatible = "mediatek, swtp-eint";
+	};
+/* -EKTONG-20,longyili.wt,20210428, add SWTP */
 
 	dsi_te: dsi_te {
 		compatible = "mediatek, DSI_TE-eint";
@@ -3322,7 +3322,15 @@ firmware_class.path=/vendor/firmware";
 			part = <0>;
 		};
 	};
-
+	flashlights_ocp8132: flashlights_ocp8132{
+		compatible = "mediatek,flashlights_ocp8132";
+		decouple = <0>;
+		channel@1 {
+			type = <0>;
+			ct = <0>;
+			part = <0>;
+		};
+	};
 	gps {
 		compatible = "mediatek,gps";
 	};
@@ -3810,3 +3818,5 @@ firmware_class.path=/vendor/firmware";
 #include "mediatek/rt9471.dtsi"
 #endif
 #include "mediatek/trusty.dtsi"
+/* Motorola base dts override */
+#include "mediatek/mt6765-moto-base.dtsi"
