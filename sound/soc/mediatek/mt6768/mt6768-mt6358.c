@@ -560,7 +560,7 @@ static struct snd_soc_dai_link mt6768_mt6358_dai_links[] = {
 	{
 		.name = "I2S3",
 		.cpu_dai_name = "I2S3",
-#ifdef CONFIG_SND_SOC_FS16XX
+#if defined(CONFIG_SND_SOC_FS16XX) || defined(CONFIG_SND_SOC_FS16XX_KERNEL)
 		.codec_dai_name = "fs16xx-aif",
 		.codec_name = "fs16xx",
 #else
@@ -575,7 +575,7 @@ static struct snd_soc_dai_link mt6768_mt6358_dai_links[] = {
 	{
 		.name = "I2S0",
 		.cpu_dai_name = "I2S0",
-#ifdef CONFIG_SND_SOC_FS16XX
+#if defined(CONFIG_SND_SOC_FS16XX) || defined(CONFIG_SND_SOC_FS16XX_KERNEL)
 		.codec_dai_name = "fs16xx-aif",
 		.codec_name = "fs16xx",
 #else
