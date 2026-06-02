@@ -11,5 +11,6 @@ himax_mtk_mmi-objs += himax_common.o
 himax_mtk_mmi-objs += himax_debug.o
 himax_mtk_mmi-objs += himax_ic_incell_core.o
 himax_mtk_mmi-objs += himax_inspection.o
+himax_mtk_mmi-objs += himax_ic_HX83112.o
 
 obj-$(CONFIG_INPUT_TOUCHSCREEN_HIMAX_MTK_MMI) += himax_mtk_mmi.o

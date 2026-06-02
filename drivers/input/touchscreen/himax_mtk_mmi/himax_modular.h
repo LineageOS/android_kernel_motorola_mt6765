@@ -16,45 +16,7 @@
 #ifndef __HIMAX_IC_USAGE_H__
 #define __HIMAX_IC_USAGE_H__
 
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX852xH)
-extern bool _hx852xH_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX852xG)
-extern bool _hx852xG_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX852xJ)
-extern bool _hx852xJ_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83102)
-extern bool _hx83102_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83103)
-extern bool _hx83103_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83106)
-extern bool _hx83106_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83108)
-extern bool _hx83108_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83111)
-extern bool _hx83111_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83112)
 extern bool _hx83112_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83113)
-extern bool _hx83113_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83121)
-extern bool _hx83121_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83191)
-extern bool _hx83191_init(void);
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83192)
-extern bool _hx83192_init(void);
-#endif
 
 #if !defined(__HIMAX_HX852xH_MOD__) && !defined(__HIMAX_HX852xG_MOD__)
 #if !defined(__HIMAX_HX852xJ_MOD__)

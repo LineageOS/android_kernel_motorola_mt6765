@@ -2785,84 +2785,10 @@ int hx_ic_register(void)
 	int ret = !NO_ERR;
 
 	I("%s:Entering!\n", __func__);
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX852xG)
-	if (_hx852xG_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX852xH)
-	if (_hx852xH_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX852xJ)
-	if (_hx852xJ_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83102)
-	if (_hx83102_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83103)
-	if (_hx83103_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83106)
-	if (_hx83106_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83108)
-	if (_hx83108_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83111)
-	if (_hx83111_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83112)
 	if (_hx83112_init()) {
 		ret = NO_ERR;
 		goto END;
 	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83113)
-	if (_hx83113_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83121)
-	if (_hx83121_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83191)
-	if (_hx83191_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
-#if defined(CONFIG_TOUCHSCREEN_HIMAX_IC_HX83192)
-	if (_hx83192_init()) {
-		ret = NO_ERR;
-		goto END;
-	}
-#endif
 END:
 	if (ret == NO_ERR)
 		I("%s: detect IC!\n", __func__);
