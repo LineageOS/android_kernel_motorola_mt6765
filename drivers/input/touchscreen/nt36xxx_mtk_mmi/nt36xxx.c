@@ -33,6 +33,7 @@
 #endif
 
 #include <tpd.h>
+#include <panelinfo.h>
 #include "nt36xxx.h"
 #if NVT_TOUCH_ESD_PROTECT
 #include <linux/jiffies.h>
@@ -66,7 +67,6 @@ struct nvt_ts_data *ts;
 #ifdef CONFIG_INPUT_TOUCHSCREEN_NT36XXX_MTK_MMI_MULTI_SUPPLIER
 #define NVT_MAX_SUPPLIER_LEN		16
 const char* lcm_panel_supplier;
-char active_panel_name[50] = {0};
 #endif
 
 #if BOOT_UPDATE_FIRMWARE
@@ -2738,62 +2738,7 @@ static struct tpd_driver_t nvt_device_driver =
 };
 
 #ifdef CONFIG_INPUT_TOUCHSCREEN_NT36XXX_MTK_MMI_MULTI_SUPPLIER
-int nvt_get_panel_by_cmdline(void)
-{
-	//parse panel name from cmdline
-	NVT_LOG("enter\n");
-	if (saved_command_line) {
-		char *sub;
-		char key_prefix[] = "mipi_mot_vid_";
-
-		//NVT_LOG("saved_command_line is %s\n", saved_command_line);
-		sub = strstr(saved_command_line, key_prefix);
-		if (sub) {
-			char *d;
-			int len, len_max = 50;
-
-			d = strstr(sub, " ");
-			if (d) {
-				len = strlen(sub) - strlen(d);
-			} else {
-				len = strlen(sub);
-			}
-
-			strncpy(active_panel_name, sub, min(len, len_max));
-			NVT_LOG("active_panel_name=%s\n", active_panel_name);
-
-		} else {
-			NVT_LOG("active panel not found!");
-			return -1;
-		}
-	} else {
-		NVT_LOG("saved_command_line null!");
-		return -1;
-	}
-
-	return 0;
-}
-
-int nvt_get_active_panel(void)
-{
-	int ret = -1;
-
-	if (strlen(active_panel_name)) {
-		NVT_LOG("already got active_panel_name=%s\n", active_panel_name);
-		return 0;
-	}
-
-	NVT_LOG("enter\n");
-	if (saved_command_line) {
-		ret = nvt_get_panel_by_cmdline();
-	} else {
-		ret = -1;
-	}
-
-	return ret;
-}
-
-static nvt_match_panel_supplier(struct device_node *np) {
+static int nvt_match_panel_supplier(struct device_node *np) {
 	int ret = -1;
 	int num_of_panel_supplier;
 
@@ -2803,7 +2748,7 @@ static nvt_match_panel_supplier(struct device_node *np) {
 	num_of_panel_supplier = of_property_count_strings(np, "novatek,panel-supplier");
 	NVT_LOG("get novatek,panel-supplier count=%d", num_of_panel_supplier);
 	if (num_of_panel_supplier > 1) {
-		nvt_get_active_panel();
+		tpd_get_panel();
 		if (strlen(active_panel_name)) {
 			int j;
 			for (j = 0; j < num_of_panel_supplier; j++) {

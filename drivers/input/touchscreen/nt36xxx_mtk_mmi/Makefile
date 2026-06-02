@@ -1,5 +1,6 @@
 ccflags-y += -I$(srctree)/drivers/input/touchscreen/nt36xxx_mtk_mmi \
-	     -I$(srctree)/drivers/input/touchscreen/mediatek
+	     -I$(srctree)/drivers/input/touchscreen/mediatek \
+	     -I$(srctree)/drivers/input/touchscreen/mmi_panelinfo
 
 nt36xxx_mtk_mmi-objs += nt36xxx.o
 nt36xxx_mtk_mmi-objs += nt36xxx_ext_proc.o
