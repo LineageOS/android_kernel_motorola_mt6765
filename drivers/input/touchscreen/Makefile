@@ -115,5 +115,6 @@ obj-$(CONFIG_TOUCHSCREEN_MTK_FOCALTECH_HD)	+= focaltech_hd_touch/
 obj-$(CONFIG_TOUCHSCREEN_MTK_FOCALTECH_FHD)	+= focaltech_fhd_touch/
 obj-$(CONFIG_TOUCHSCREEN_MTK_SYNAPTICS_I2C_RMI4)	+=  synaptics_i2c_rmi4/
 obj-$(CONFIG_TOUCHSCREEN_MMI_PANELINFO) += mmi_panelinfo/
+obj-$(CONFIG_INPUT_TOUCHSCREEN_HIMAX_MTK_MMI) += himax_mtk_mmi/
 TOUCH_LISTS := $(subst ",,$(CONFIG_TOUCHSCREEN_MTK_TOUCH))
 obj-y += $(foreach TOUCH,$(TOUCH_LISTS),$(TOUCH)/)
