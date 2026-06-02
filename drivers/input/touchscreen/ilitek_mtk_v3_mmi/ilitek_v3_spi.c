@@ -560,7 +560,7 @@ int ili_core_spi_setup(int num)
 	return 0;
 }
 
-static int ili_parse_tp_module() {
+static int ili_parse_tp_module(void) {
 	int tp_module = 0;
 
 	if (ilits->panel_supplier && strstr(ilits->panel_supplier, "txd")) {

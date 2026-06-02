@@ -449,7 +449,7 @@ static struct tpd_driver_t tpd_device_driver = {
 	.resume = tpd_resume,
 };
 
-int ili_check_dt() {
+static int __init ili_check_dt(void) {
 	int ret = 0;
         struct device_node *node1 = NULL;
 
