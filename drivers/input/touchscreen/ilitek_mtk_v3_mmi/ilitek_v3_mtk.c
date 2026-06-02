@@ -22,6 +22,7 @@
 
 #include "ilitek_v3.h"
 #include <tpd.h>
+#include <panelinfo.h>
 
 #define DTS_INT_GPIO	"touch,irq-gpio"
 #define DTS_RESET_GPIO	"touch,reset-gpio"
@@ -465,6 +466,26 @@ int ili_check_dt() {
 	return ret;
 }
 
+static int __init ili_check_panel(void) {
+	//check panel
+        int ret = -1;
+
+        //check panel
+	tpd_get_panel();
+        ILI_INFO("enter, active_panel_name=%s\n", active_panel_name);
+        if (strlen(active_panel_name) && tpd_device_driver.tpd_panel_supplier) {
+                ILI_INFO("need check panel info\n");
+                if (strstr(active_panel_name, tpd_device_driver.tpd_panel_supplier)) {
+                        ILI_INFO("panel matched!");
+                        ret = 0;
+                } else {
+                        ILI_INFO("panel not matched!\n");
+                }
+        }
+
+        return ret;
+}
+
 static int __init ilitek_plat_dev_init(void)
 {
 	int ret = 0;
@@ -476,6 +497,14 @@ static int __init ilitek_plat_dev_init(void)
         }
 
 	ili_check_dt();
+	if (tpd_dts_data.tpd_panel_match) {
+		ret = ili_check_panel();
+		//check panel
+		if (ret) {
+			ILI_INFO("ili_check_panel fail, ret=%d\n", ret);
+			return ret;
+		}
+	}
 
 	ret = tpd_driver_add(&tpd_device_driver);
 	if (ret < 0) {

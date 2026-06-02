@@ -1,5 +1,6 @@
 ccflags-y += -I$(srctree)/drivers/input/touchscreen/ilitek_mtk_v3_mmi \
-	     -I$(srctree)/drivers/input/touchscreen/mediatek
+	     -I$(srctree)/drivers/input/touchscreen/mediatek \
+	     -I$(srctree)/drivers/input/touchscreen/mmi_panelinfo
 
 ilitek_mtk_v3_mmi-objs += ilitek_v3.o
 ilitek_mtk_v3_mmi-objs += ilitek_v3_spi.o
