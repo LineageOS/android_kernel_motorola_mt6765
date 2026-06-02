@@ -2777,7 +2777,7 @@ static int nvt_match_panel_supplier(struct device_node *np) {
 }
 #endif
 
-int nvt_check_dt() {
+static int __init nvt_check_dt(void) {
 	int ret = 0;
         struct device_node *node1 = NULL;
 
