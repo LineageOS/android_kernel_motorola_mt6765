@@ -1,5 +1,6 @@
 ccflags-y += -I$(srctree)/drivers/input/touchscreen/himax_mtk_mmi \
-	     -I$(srctree)/drivers/input/touchscreen/mediatek
+	     -I$(srctree)/drivers/input/touchscreen/mediatek \
+		 -I$(srctree)/drivers/input/touchscreen/mmi_panelinfo
 
 ccflags-y += -DCONFIG_TOUCHSCREEN_HIMAX_DEBUG \
 		-DCONFIG_TOUCHSCREEN_HIMAX_INSPECT

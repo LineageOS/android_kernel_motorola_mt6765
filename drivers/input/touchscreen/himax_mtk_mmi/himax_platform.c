@@ -16,6 +16,8 @@
 #include <linux/spi/spi.h>
 #include <linux/spi/spidev.h>
 
+#include <panelinfo.h>
+
 #include "himax_platform.h"
 #include "himax_common.h"
 
@@ -782,6 +784,26 @@ int himax_check_dt() {
 	return ret;
 }
 
+static int __init himax_check_panel(void) {
+	//check panel
+        int ret = -1;
+
+        //check panel
+	tpd_get_panel();
+        I("enter, active_panel_name=%s\n", active_panel_name);
+        if (strlen(active_panel_name) && tpd_device_driver.tpd_panel_supplier) {
+                I("need check panel info\n");
+                if (strstr(active_panel_name, tpd_device_driver.tpd_panel_supplier)) {
+                        I("panel matched!");
+                        ret = 0;
+                } else {
+                        I("panel not matched!\n");
+                }
+        }
+
+        return ret;
+}
+
 static int __init himax_common_init(void)
 {
 	I("Himax_common touch panel driver init\n");
@@ -800,6 +822,12 @@ static int __init himax_common_init(void)
         kp_tpd_get_dts_info();
     }
 	himax_check_dt();
+	if (tpd_dts_data.tpd_panel_match) {
+		if (himax_check_panel() < 0) {
+			I("Panel vendor check failed!");
+			goto ERR;
+		}
+	}
 
 	if (kp_tpd_driver_add(&tpd_device_driver) < 0) {
 		I("Failed to add Driver!\n");
