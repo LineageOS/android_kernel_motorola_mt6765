@@ -1372,5 +1372,6 @@ config TOUCHSCREEN_MMI_PANELINFO
 	bool
 
 source "drivers/input/touchscreen/himax_mtk_mmi/Kconfig"
+source "drivers/input/touchscreen/ilitek_mtk_v3_mmi/Kconfig"
 
 endif
