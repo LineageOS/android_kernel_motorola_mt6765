@@ -256,4 +256,6 @@ source "drivers/slimbus/Kconfig"
 source "drivers/interconnect/Kconfig"
 
 source "drivers/energy_model/Kconfig"
+
+source "drivers/sensors/Kconfig"
 endmenu
