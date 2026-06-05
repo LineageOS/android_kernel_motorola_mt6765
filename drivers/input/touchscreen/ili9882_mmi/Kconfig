@@ -1,0 +1,7 @@
+config INPUT_TOUCHSCREEN_ILI9882_MMI
+	bool "ILI9882 MMI Touch Driver"
+	help
+	  Say Y here to enable the ILI9882 MMI Touch
+	  driver.
+
+	  If unsure, say N.

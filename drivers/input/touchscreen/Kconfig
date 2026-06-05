@@ -1376,5 +1376,6 @@ source "drivers/input/touchscreen/ilitek_mtk_v3_mmi/Kconfig"
 source "drivers/input/touchscreen/nt36xxx_mtk_mmi/Kconfig"
 source "drivers/input/touchscreen/focaltech_mtk_v3_mmi/Kconfig"
 source "drivers/input/touchscreen/icnl9916_tddi_mmi/Kconfig"
+source "drivers/input/touchscreen/ili9882_mmi/Kconfig"
 
 endif
