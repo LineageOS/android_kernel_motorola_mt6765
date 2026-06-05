@@ -118,5 +118,6 @@ obj-$(CONFIG_TOUCHSCREEN_MMI_PANELINFO) += mmi_panelinfo/
 obj-$(CONFIG_INPUT_TOUCHSCREEN_HIMAX_MTK_MMI) += himax_mtk_mmi/
 obj-$(CONFIG_INPUT_TOUCHSCREEN_ILITEK_MTK_V3_MMI) += ilitek_mtk_v3_mmi/
 obj-$(CONFIG_INPUT_TOUCHSCREEN_NT36XXX_MTK_MMI) += nt36xxx_mtk_mmi/
+obj-$(CONFIG_INPUT_TOUCHSCREEN_FTS_MTK_V3_MMI) += focaltech_mtk_v3_mmi/
 TOUCH_LISTS := $(subst ",,$(CONFIG_TOUCHSCREEN_MTK_TOUCH))
 obj-y += $(foreach TOUCH,$(TOUCH_LISTS),$(TOUCH)/)
