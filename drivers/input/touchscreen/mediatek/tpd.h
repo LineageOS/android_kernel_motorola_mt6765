@@ -139,9 +139,6 @@ struct tpd_driver_t {
 	struct tpd_attrs attrs;
 };
 
-extern char active_panel_name[50];
-extern int tpd_get_panel(void);
-
 #if 1				/* #ifdef TPD_HAVE_BUTTON */
 void tpd_button(unsigned int x, unsigned int y, unsigned int down);
 void tpd_button_init(void);

@@ -49,54 +49,6 @@ const struct of_device_id touch_of_match[] = {
 	{},
 };
 
-char active_panel_name[50] = {0};
-
-int tpd_get_panel(void)
-{
-	if (strlen(active_panel_name)) {
-		TPD_DMESG("got active_panel_name=%s\n", active_panel_name);
-		return 0;
-	}
-
-	//bringup, parse panel name from cmdline
-	TPD_DMESG("enter\n");
-	if (saved_command_line) {
-		char *sub;
-		char key_prefix[] = "mipi_mot_vid_";
-
-		TPD_DMESG("saved_command_line is %s\n", saved_command_line);
-		sub = strstr(saved_command_line, key_prefix);
-		if (sub) {
-			char *d;
-			int n, len, len_max = 50;
-
-			d = strstr(sub, " ");
-			if (d) {
-				n = strlen(sub) - strlen(d);
-			} else {
-				n = strlen(sub);
-			}
-
-			if (n > len_max)
-				len = len_max;
-			else
-				len = n;
-
-			strncpy(active_panel_name, sub, len);
-			TPD_DMESG("active_panel_name=%s\n", active_panel_name);
-
-		} else {
-			TPD_DMESG("active panel not found!");
-			return -1;
-		}
-	} else {
-		TPD_DMESG("saved_command_line null!");
-		return -1;
-	}
-
-	return 0;
-}
-
 void tpd_get_dts_info(void)
 {
 	struct device_node *node1 = NULL;
