@@ -1,5 +1,6 @@
 ccflags-y += -I$(srctree)/drivers/input/touchscreen/nova_0flash_mmi \
-	     -I$(srctree)/drivers/input/touchscreen/mediatek
+	     -I$(srctree)/drivers/input/touchscreen/mediatek \
+		 -I$(srctree)/drivers/input/touchscreen/mmi_panelinfo
 
 ccflags-y += -DNVT_MTK_GET_PANEL
 

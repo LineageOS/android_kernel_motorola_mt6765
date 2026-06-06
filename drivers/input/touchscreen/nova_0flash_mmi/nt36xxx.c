@@ -50,6 +50,10 @@
 #include <linux/jiffies.h>
 #endif /* #if NVT_TOUCH_ESD_PROTECT */
 
+#if NVT_MTK_GET_PANEL
+#include <panelinfo.h>
+#endif
+
 #ifdef NVT_CONFIG_PANEL_NOTIFICATIONS
 #define register_panel_notifier panel_register_notifier
 #define unregister_panel_notifier panel_unregister_notifier
@@ -2194,54 +2198,20 @@ static int pen_notifier_callback(struct notifier_block *self,
 #endif
 
 #ifdef NVT_MTK_GET_PANEL
-char active_panel_name[50] = {0};
-
 static int nvt_get_panel(void)
 {
-	if (strlen(active_panel_name)) {
-		NVT_LOG("got active_panel_name=%s\n", active_panel_name);
-		return 0;
-	}
+	int ret;
+	const char ic_prefix[] = "nt36";
 
-	//bringup, parse panel name from cmdline
-	NVT_LOG("enter\n");
-	if (saved_command_line) {
-		char *sub;
-		char key_prefix[] = "mipi_mot_vid_";
-		char ic_prefix[] = "nt36";
-		NVT_LOG("saved_command_line is %s\n", saved_command_line);
-		sub = strstr(saved_command_line, key_prefix);
-		if (sub) {
-			char *d;
-			int n, len, len_max = 50;
+	NVT_LOG("enter");
+	ret = tpd_get_panel();
+	if (ret)
+		return -1;
 
-			d = strstr(sub, " ");
-			if (d) {
-				n = strlen(sub) - strlen(d);
-			} else {
-				n = strlen(sub);
-			}
-
-			if (n > len_max)
-				len = len_max;
-			else
-				len = n;
-
-			strncpy(active_panel_name, sub, len);
-
-			if(strstr(active_panel_name, ic_prefix)) {
-				NVT_LOG("active_panel_name=%s\n", active_panel_name);
-			} else {
-				NVT_LOG("Not novatek panel!\n");
-				return -1;
-			}
-
-		} else {
-			NVT_LOG("active panel not found!\n");
-			return -1;
-		}
+	if(strstr(active_panel_name, ic_prefix)) {
+		NVT_LOG("active_panel_name=%s", active_panel_name);
 	} else {
-		NVT_LOG("saved_command_line null!\n");
+		NVT_LOG("Not novatek panel!");
 		return -1;
 	}
 
