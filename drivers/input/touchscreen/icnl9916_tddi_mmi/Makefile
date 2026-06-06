@@ -1,5 +1,6 @@
 ccflags-y += -I$(srctree)/drivers/input/touchscreen/icnl9916_tddi_mmi \
-	     -I$(srctree)/drivers/input/touchscreen/mediatek
+	     -I$(srctree)/drivers/input/touchscreen/mediatek \
+	     -I$(srctree)/drivers/input/touchscreen/mmi_panelinfo
 
 ccflags-y += -DCTS_MTK_GET_PANEL
 

@@ -14,7 +14,7 @@ static int check_dt(struct device_node *np);
 #endif
 bool cts_show_debug_log = false;
 #ifdef CTS_MTK_GET_PANEL
-static char *active_panel_name = NULL;
+#include <panelinfo.h>
 #endif
 
 module_param_named(debug_log, cts_show_debug_log, bool, 0660);
@@ -276,49 +276,20 @@ static int check_default_tp(struct device_node *dt, const char *prop)
 #endif
 
 #ifdef CTS_MTK_GET_PANEL
-char panel_name[50] = {0};
-
 static int cts_get_panel(void)
 {
-	//bringup, parse panel name from cmdline
+	int ret;
+	const char ic_prefix[] = "icnl";
+
 	cts_info("enter");
-	if (saved_command_line) {
-		char *sub;
-		char key_prefix[] = "mipi_mot_vid_";
-		char ic_prefix[] = "icnl";
-		cts_info("saved_command_line is %s", saved_command_line);
-		sub = strstr(saved_command_line, key_prefix);
-		if (sub) {
-			char *d;
-			int n, len, len_max = 50;
+	ret = tpd_get_panel();
+	if (ret)
+		return -1;
 
-			d = strstr(sub, " ");
-			if (d) {
-				n = strlen(sub) - strlen(d);
-			} else {
-				n = strlen(sub);
-			}
-
-			if (n > len_max)
-				len = len_max;
-			else
-				len = n;
-
-			strncpy(panel_name, sub, len);
-			active_panel_name = panel_name;
-			if(strstr(active_panel_name, ic_prefix)) {
-				cts_info("active_panel_name=%s", active_panel_name);
-			} else {
-				cts_info("Not chipone panel!");
-				return -1;
-			}
-
-		} else {
-			cts_info("chipone active panel not found!");
-			return -1;
-		}
+	if(strstr(active_panel_name, ic_prefix)) {
+		cts_info("active_panel_name=%s", active_panel_name);
 	} else {
-		cts_info("saved_command_line null!");
+		cts_info("Not chipone panel!");
 		return -1;
 	}
 
