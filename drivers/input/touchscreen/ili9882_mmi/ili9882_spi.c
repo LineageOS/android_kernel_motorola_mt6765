@@ -24,7 +24,7 @@
 #ifdef CONFIG_DRM
 struct drm_panel *ili_active_panel;
 #if defined(ILI_FW_PANEL) || defined(ILI_MTK_GET_PANEL)
-static char *active_panel_name = NULL;
+#include <panelinfo.h>
 #endif
 static int check_dt(struct device_node *np);
 #endif
@@ -587,49 +587,20 @@ static int parse_dt(struct device_node *np)
 #endif
 
 #ifdef ILI_MTK_GET_PANEL
-char panel_name[50] = {0};
-
 static int ili_get_panel(void)
 {
-	//bringup, parse panel name from cmdline
-	ILI_INFO("enter\n");
-	if (saved_command_line) {
-		char *sub;
-		char key_prefix[] = "mipi_mot_vid_";
-		char ic_prefix[] = "ili";
-		ILI_INFO("saved_command_line is %s\n", saved_command_line);
-		sub = strstr(saved_command_line, key_prefix);
-		if (sub) {
-			char *d;
-			int n, len, len_max = 50;
+	int ret;
+	const char ic_prefix[] = "ili";
 
-			d = strstr(sub, " ");
-			if (d) {
-				n = strlen(sub) - strlen(d);
-			} else {
-				n = strlen(sub);
-			}
+	ILI_INFO("enter");
+	ret = tpd_get_panel();
+	if (ret)
+		return -1;
 
-			if (n > len_max)
-				len = len_max;
-			else
-				len = n;
-
-			strncpy(panel_name, sub, len);
-			active_panel_name = panel_name;
-			if(strstr(active_panel_name, ic_prefix)) {
-				ILI_INFO("active_panel_name=%s\n", active_panel_name);
-			} else {
-				ILI_INFO("Not ilitek panel!\n");
-				return -1;
-			}
-
-		} else {
-			ILI_INFO("ilitek active panel not found!\n");
-			return -1;
-		}
+	if(strstr(active_panel_name, ic_prefix)) {
+		ILI_INFO("active_panel_name=%s", active_panel_name);
 	} else {
-		ILI_INFO("saved_command_line null!\n");
+		ILI_INFO("Not ilitek panel!");
 		return -1;
 	}
 

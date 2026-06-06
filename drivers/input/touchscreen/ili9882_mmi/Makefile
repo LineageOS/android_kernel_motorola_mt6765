@@ -1,5 +1,6 @@
 ccflags-y += -I$(srctree)/drivers/input/touchscreen/ili9882_mmi \
-	     -I$(srctree)/drivers/input/touchscreen/mediatek
+	     -I$(srctree)/drivers/input/touchscreen/mediatek \
+		 -I$(srctree)/drivers/input/touchscreen/mmi_panelinfo
 
 ccflags-y += -DILI_CONFIG_RESUME_BY_DDI
 ccflags-y += -DILI_MTK_GET_PANEL
