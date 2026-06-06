@@ -454,7 +454,7 @@ int ili_core_spi_setup(int num)
 }
 
 #if defined(ILI_FW_PANEL) || defined(ILI_MTK_GET_PANEL)
-static int ili_parse_tp_module()
+static int ili_parse_tp_module(void)
 {
    int tp_module = 0;
 	if(active_panel_name) {
