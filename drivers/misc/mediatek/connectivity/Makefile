@@ -57,6 +57,9 @@ export MTK_ANDROID_WMT=y
 export MTK_ANDROID_EMI=y
 export WIFI_IP_SET=1
 export MTK_WLAN_SERVICE=yes
+export CFG_FM_CHIP_ID=6765
+export CFG_FM_CHIP=mt6631
+export CFG_FM_PLAT=mt6631
 
 # Do build-in for xxx.c checking
 subdir-ccflags-y += -D MTK_WCN_REMOVE_KERNEL_MODULE
