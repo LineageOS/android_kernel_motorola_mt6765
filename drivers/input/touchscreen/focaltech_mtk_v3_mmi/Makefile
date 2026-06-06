@@ -1,5 +1,6 @@
 ccflags-y += -I$(srctree)/drivers/input/touchscreen/focaltech_mtk_v3_mmi \
-	     -I$(srctree)/drivers/input/touchscreen/mediatek
+	     -I$(srctree)/drivers/input/touchscreen/mediatek \
+	     -I$(srctree)/drivers/input/touchscreen/mmi_panelinfo
 
 ccflags-y += -DFOCALTECH_FB_PANEL_EN
 

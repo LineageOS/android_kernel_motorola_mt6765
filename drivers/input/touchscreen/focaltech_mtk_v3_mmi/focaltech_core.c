@@ -50,6 +50,7 @@
 #include <linux/earlysuspend.h>
 #define FTS_SUSPEND_LEVEL 1     /* Early-suspend level */
 #endif
+#include <panelinfo.h>
 #include "focaltech_core.h"
 
 /*****************************************************************************
@@ -76,11 +77,6 @@ struct fts_ts_data *fts_data;
 *****************************************************************************/
 static int fts_ts_suspend(struct device *dev);
 static int fts_ts_resume(struct device *dev);
-
-#if FTS_FB_PANEL
-char active_panel_name[50] = {0};
-int fts_get_active_panel(void);
-#endif
 
 int fts_check_cid(struct fts_ts_data *ts_data, u8 id_h)
 {
@@ -1547,61 +1543,6 @@ static void fts_resume_work(struct work_struct *work)
 
 #if defined(CONFIG_FB)
 #if FTS_FB_PANEL
-int fts_get_panel_by_cmdline(void)
-{
-	//bringup, parse panel name from cmdline
-	FTS_FUNC_ENTER();
-	if (saved_command_line) {
-		char *sub;
-		char key_prefix[] = "mipi_mot_vid_";
-
-		//FTS_DEBUG("saved_command_line is %s\n", saved_command_line);
-		sub = strstr(saved_command_line, key_prefix);
-		if (sub) {
-			char *d;
-			int len, len_max = 50;
-
-			d = strstr(sub, " ");
-			if (d) {
-				len = strlen(sub) - strlen(d);
-			} else {
-				len = strlen(sub);
-			}
-
-			strncpy(active_panel_name, sub, min(len, len_max));
-			FTS_INFO("active_panel_name=%s\n", active_panel_name);
-
-		} else {
-			FTS_INFO("active panel not found!");
-			return -1;
-		}
-	} else {
-		FTS_INFO("saved_command_line null!");
-		return -1;
-	}
-
-	return 0;
-}
-
-int fts_get_active_panel(void)
-{
-	int ret;
-
-	if (strlen(active_panel_name)) {
-		FTS_INFO("already got active_panel_name=%s\n", active_panel_name);
-		return 0;
-	}
-
-	if (saved_command_line) {
-		//bringup, parse panel name from cmdline
-		ret = fts_get_panel_by_cmdline();
-	} else {
-		ret = -1;
-	}
-
-	return ret;
-}
-
 static int fts_fb_check_dt(struct device_node *np)
 {
 	int ret = 0;
@@ -1611,7 +1552,7 @@ static int fts_fb_check_dt(struct device_node *np)
 		return ret;
 
 	FTS_FUNC_ENTER();
-	ret = fts_get_active_panel();
+	ret = tpd_get_panel();
 	if (ret || !strlen(active_panel_name)) {
 		FTS_ERROR("not get active_panel, ret=%d\n", ret);
 		return ret;
