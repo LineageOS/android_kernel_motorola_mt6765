@@ -13,9 +13,12 @@ config MTK_FINGERPRINT_SUPPORT
 	  use mediatek fingerprint driver,fingerprint
 	  driver will support fingerprint function
 
+if MTK_FINGERPRINT_SUPPORT
+
 config MTK_FINGERPRINT_SELECT
 	string "sensor type"
 	default "GF318M"
 
+endif
 
 endmenu
