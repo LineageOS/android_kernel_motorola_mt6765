@@ -1803,6 +1803,8 @@ static int bq2560x_charger_probe(struct i2c_client *client,
 		return ret;
 	}
 
+	g_bq2560x = bq;
+
 	bq2560x_register_interrupt(bq);
 
 	bq->chg_dev = charger_device_register(bq->chg_dev_name,
@@ -1819,8 +1821,6 @@ static int bq2560x_charger_probe(struct i2c_client *client,
 		dev_err(bq->dev, "failed to register sysfs. err: %d\n", ret);
 
 	determine_initial_status(bq);
-
-	g_bq2560x = bq;
 
 	mutex_init(&bq->attach_lock);
 
