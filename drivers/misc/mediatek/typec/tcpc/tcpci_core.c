@@ -403,7 +403,8 @@ int mmi_get_bootarg(char *key, char **value)
 	int err = 1;
 	struct device_node *n = of_find_node_by_path("/chosen");
 	size_t bootargs_tmp_len = 0;
-        char *bootargs_str = NULL;
+	char *bootargs_str = NULL;
+	char *token_val = NULL;
 
 	if (n == NULL)
 		goto err;
@@ -412,28 +413,29 @@ int mmi_get_bootarg(char *key, char **value)
 		goto putnode;
 
 	bootargs_tmp_len = strlen(bootargs_tmp);
-	if (!bootargs_str) {
-		/* The following operations need a non-const
-		 * version of bootargs
-		 */
-		bootargs_str = kmalloc(bootargs_tmp_len + 1, GFP_KERNEL);
-		if (!bootargs_str)
-			goto putnode;
-	}
+	bootargs_str = kmalloc(bootargs_tmp_len + 1, GFP_KERNEL);
+	if (!bootargs_str)
+		goto putnode;
+
 	strlcpy(bootargs_str, bootargs_tmp, bootargs_tmp_len + 1);
 
 	idx = strnstr(bootargs_str, key, strlen(bootargs_str));
 	if (idx) {
 		kvpair = strsep(&idx, " ");
-		if (kvpair)
-			if (strsep(&kvpair, "=")) {
-				*value = strsep(&kvpair, " ");
-				if (*value)
-					err = 0;
+		if (kvpair) {
+			char *discard = strsep(&kvpair, "=");
+			if (discard) {
+				token_val = strsep(&kvpair, " ");
+				if (token_val) {
+					*value = kstrdup(token_val, GFP_KERNEL);
+					if (*value)
+						err = 0;
+				}
 			}
+		}
 	}
 
-        kfree(bootargs_str);
+	kfree(bootargs_str);
 
 putnode:
 	of_node_put(n);
@@ -442,14 +444,19 @@ err:
 }
 
 bool mmi_check_pfchargebootmode(void) {
-        char *mmi_bootmode;
-        if (mmi_get_bootarg("androidboot.mode=", &mmi_bootmode) == 0) {
-                pr_info("[%s] check mmi_bootmode = %s.\n", __func__, mmi_bootmode);
-                return (strcmp("charger", mmi_bootmode) == 0 ? true : false);
-        } else {
-                pr_err("%s get bootmode fail\n", __func__);
-                return false;
-        }
+	char *mmi_bootmode = NULL;
+	bool is_charger = false;
+
+	if (mmi_get_bootarg("androidboot.mode=", &mmi_bootmode) == 0) {
+		pr_info("[%s] check mmi_bootmode = %s.\n", __func__, mmi_bootmode);
+		is_charger = (strcmp("charger", mmi_bootmode) == 0);
+		
+		kfree(mmi_bootmode); 
+		return is_charger;
+	} else {
+		pr_err("%s get bootmode fail\n", __func__);
+		return false;
+	}
 }
 #endif
 
