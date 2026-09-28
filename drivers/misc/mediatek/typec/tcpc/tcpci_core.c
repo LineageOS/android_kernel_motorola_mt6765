@@ -395,7 +395,7 @@ static void tcpc_init_work(struct work_struct *work);
 static void tcpc_event_init_work(struct work_struct *work);
 
 #ifdef CONFIG_TYPEC_PD_POWER_OFF_CHARGE_DELAY
-int mmi_get_bootarg(char *key, char **value)
+static int mmi_get_bootarg(char *key, char **value)
 {
 	const char *bootargs_tmp = NULL;
 	char *idx = NULL;

@@ -62,3 +62,4 @@ obj-$(CONFIG_UID_SYS_STATS)	+= uid_sys_stats.o
 obj-y				+= mediatek/
 obj-$(CONFIG_ABOV_MMI_OVERLAY_7CH) += abov_mmi_overlay_7ch/
 obj-$(CONFIG_MOTO_UTAGS)	+= utag/
+obj-$(CONFIG_MOTO_MMI_INFO)	+= mmi_info/
