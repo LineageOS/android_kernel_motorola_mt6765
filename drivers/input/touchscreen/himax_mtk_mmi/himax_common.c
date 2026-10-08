@@ -2971,23 +2971,9 @@ int himax_chip_common_init(void)
 	struct himax_i2c_platform_data *pdata;
 
 	I("Prepare kernel fp\n");
-	kp_getname_kernel = (void *)kallsyms_lookup_name("getname_kernel");
-	if (!kp_getname_kernel) {
-		E("prepare kp_getname_kernel failed!\n");
-		/*goto err_xfer_buff_fail;*/
-	}
-
-	kp_putname_kernel = (void *)kallsyms_lookup_name("putname");
-	if (!kp_putname_kernel) {
-		E("prepare kp_putname_kernel failed!\n");
-		/*goto err_xfer_buff_fail;*/
-	}
-
-	kp_file_open_name = (void *)kallsyms_lookup_name("file_open_name");
-	if (!kp_file_open_name) {
-		E("prepare kp_file_open_name failed!\n");
-		goto err_xfer_buff_fail;
-	}
+	kp_getname_kernel = getname_kernel;
+	kp_putname_kernel = putname;
+	kp_file_open_name = file_open_name;
 
 	ts->xfer_buff = devm_kzalloc(ts->dev, 128 * sizeof(uint8_t),
 			GFP_KERNEL);
