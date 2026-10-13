@@ -1780,9 +1780,15 @@ static int bq2560x_charger_probe(struct i2c_client *client,
 		return -EINVAL;
 	}
 
-	if (bq->part_no != *(int *)match->data)
-		pr_info("part no mismatch, hw:%s, devicetree:%s\n",
-			pn_str[bq->part_no], pn_str[*(int *) match->data]);
+	if (bq->part_no != *(int *)match->data) {
+		if (bq->part_no >= 0 && bq->part_no < ARRAY_SIZE(pn_str)) {
+			pr_info("part no mismatch, hw:%s, devicetree:%s\n",
+				pn_str[bq->part_no], pn_str[*(int *) match->data]);
+		} else {
+			pr_info("part no mismatch, hw:unknown, devicetree:%s\n",
+				pn_str[*(int *) match->data]);
+		}
+	}
 
 	bq->platform_data = bq2560x_parse_dt(node, bq);
 
