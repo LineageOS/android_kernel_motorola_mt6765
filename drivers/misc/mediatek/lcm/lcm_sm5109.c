@@ -204,6 +204,7 @@ static int _lcm_i2c_remove(struct i2c_client *client)
 	 {
 	  .compatible = "mediatek,i2c_lcd_bias",
 	  },
+	{},
  };
 
  static const struct i2c_device_id _lcm_i2c_id[] = {
